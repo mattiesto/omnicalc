@@ -101,12 +101,14 @@ class CalculationsController < ApplicationController
     @mean = @sum / @count
 
 #### pick up from here!
+    @sum_sqr = @numbers.collect{|x| (@mean-x)**2}
 
-    @variance =
+    @variance = @sum_sqr.inject(:+)/@count
 
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = @variance**0.5
 
-    @mode = "Replace this string with your answer."
+    @frequency = @numbers.inject(Hash.new(0)) { |h,v| h[v] += 1; h}
+    @mode = @numbers.max_by { |v| @frequency[v] }
 
     # ================================================================================
     # Your code goes above.
