@@ -11,14 +11,13 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
 
-    @character_count_with_spaces = "Replace this string with your answer."
+    @character_count_with_spaces = @text.length
 
-    @character_count_without_spaces = "Replace this string with your answer."
+    @character_count_without_spaces = @text.delete("\s").length
 
-    @word_count = "Replace this string with your answer."
+    @word_count = @text.split.length
 
-    @occurrences = "Replace this string with your answer."
-
+    @occurrences = @text.scan(@special_word).count
     # ================================================================================
     # Your code goes above.
     # ================================================================================
@@ -34,11 +33,14 @@ class CalculationsController < ApplicationController
     # ================================================================================
     # Your code goes below.
     # The annual percentage rate the user input is in the decimal @apr.
+    @rate = @apr/12/100
+    @periods = @years*12
+
     # The number of years the user input is in the integer @years.
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    @monthly_payment = @principal*(@rate/(1-(1+@rate)**(-@periods)))
 
     # ================================================================================
     # Your code goes above.
